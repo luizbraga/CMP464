@@ -2,6 +2,7 @@ package com.example.cmp464;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 /**
@@ -21,10 +22,10 @@ public class Activity2 extends Activity{
 		String descr = bundle.getString("description");
 		String lnk = bundle.getString("link");
 		
-		TextView descTV = (TextView) findViewById(R.id.feed_description);
+		WebView descTV = (WebView) findViewById(R.id.feed_description);
 		TextView descLink = (TextView) findViewById(R.id.feed_link);
 		
-		descTV.setText(descr);
+		descTV.loadData(descr, "text/html", null);
 		descLink.setText(lnk);
 	}
 		

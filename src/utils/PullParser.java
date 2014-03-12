@@ -89,7 +89,7 @@ public class PullParser {
 			}
 			else if(xmlparser.getName().equals("description")){
 				if(xmlparser.next() == XmlPullParser.TEXT){
-					item.setDescription(xmlparser.getText().substring(0, xmlparser.getText().lastIndexOf(".<img ")+1));
+					item.setDescription(xmlparser.getText());
 					xmlparser.nextTag();
 				}
 			} else{
