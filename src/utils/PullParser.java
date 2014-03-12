@@ -17,6 +17,9 @@ import com.example.cmp464.Item;
  * Fourth level: title, link and description
  * 
  * Using this structure I was able to create a Item object for each item tag in the XML file
+ * 
+ * This code is loosely based in the code in this web site:
+ * http://www.androidpit.com/java-guide-2-program-your-own-rss-reader
  * @author luizbraga
  *
  */
