@@ -10,6 +10,12 @@ import android.widget.ArrayAdapter;
 
 
 public class AsyncTaskFeed extends AsyncTask<Void,Void,List<Item>>{
+	MainActivity mainActivity;
+	
+	public AsyncTaskFeed(MainActivity mainActivity){
+		this.mainActivity = mainActivity;
+	}
+	
 	
 	@Override
 	protected List<Item> doInBackground(Void... arg0) {
@@ -37,12 +43,12 @@ public class AsyncTaskFeed extends AsyncTask<Void,Void,List<Item>>{
 			titles[i]=result.get(i).getTitle();
 		}
 		if(result != null){
-			// Using the MainActivity.instance I was able to change the ListView in the MainActivity
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.instance,android.R.layout.simple_list_item_1, titles);
-			MainActivity.lv.setAdapter(adapter);
 			
 			// Set the array of items in the MainActivity class
-			MainActivity.items = result;
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(mainActivity,android.R.layout.simple_list_item_1, titles);
+			mainActivity.items = result;
+			mainActivity.lv.setAdapter(adapter);
+			
 		}
 	}
 
