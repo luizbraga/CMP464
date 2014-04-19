@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import org.xmlpull.v1.XmlPullParserException;
 import utils.Downloader;
+import utils.NewsManager;
 import utils.PullParser;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
@@ -42,9 +43,13 @@ public class AsyncTaskFeed extends AsyncTask<Void,Void,List<Item>>{
 		for(int i=0;i<result.size();i++){
 			titles[i]=result.get(i).getTitle();
 		}
+		
 		if(result != null){
-			
+			NewsManager db = new NewsManager(mainActivity);
 			// Set the array of items in the MainActivity class
+			db.dropTable();
+			db.addAllNews(result);
+			
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(mainActivity,android.R.layout.simple_list_item_1, titles);
 			mainActivity.items = result;
 			mainActivity.lv.setAdapter(adapter);

@@ -2,8 +2,13 @@ package utils;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -92,7 +97,22 @@ public class PullParser {
 					item.setDescription(xmlparser.getText());
 					xmlparser.nextTag();
 				}
-			} else{
+			} 
+			else if(xmlparser.getName().equals("pubDate")){
+				if(xmlparser.next() == XmlPullParser.TEXT){
+					try {
+						SimpleDateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
+						Date date = formatter.parse(xmlparser.getText());
+						item.setDate(date);
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					//item.setDate(xmlparser.getText());
+					xmlparser.nextTag();
+				}
+			}
+			
+			else{
 				skip(xmlparser);
 			}
 		}
